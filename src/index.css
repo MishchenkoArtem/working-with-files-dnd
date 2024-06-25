@@ -1,0 +1,13 @@
+html {
+  font-size: 10px;
+}
+
+.page {
+  margin: 0;
+  display: flex;
+  justify-content: center;
+}
+.page__title {
+  font-size: 2rem;
+  margin: 0;
+}/*# sourceMappingURL=index.css.map */
