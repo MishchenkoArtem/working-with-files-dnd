@@ -6,6 +6,7 @@ html {
   margin: 0;
   display: flex;
   justify-content: center;
+  background-color: #00BFFF;
 }
 .page__title {
   font-size: 2rem;

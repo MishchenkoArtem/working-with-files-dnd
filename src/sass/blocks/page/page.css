@@ -2,8 +2,5 @@
   margin: 0;
   display: flex;
   justify-content: center;
-}
-.page__title {
-  font-size: 2rem;
-  margin: 0;
+  background-color: #00BFFF;
 }/*# sourceMappingURL=page.css.map */
