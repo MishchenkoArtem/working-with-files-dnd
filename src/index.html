@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="ru">
-
     <head>
         <meta charset="UTF-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -10,29 +9,55 @@
 
     <body class="page">
         <section class="column">
+            <div class="column__header-container">
+                <h2 class="column__title">TODO</h2>
+                <span class="column__object"></span>
+            </div>
             <ul class="column__list">
-                <div class="column__header-container">
-                    <h2 class="column__title"></h2>
-                    <span class="column__object"></span>
-                </div>
+                <li class="column__item">
+                    <div class="column__item-hover"></div>
+                    <p class="column__text">
+                        Welcome to trello
+                    </p>
+                </li>
+                <li class="column__item">
+                    <div class="column__item-hover"></div>
+                    <p class="column__text">This is card</p>
+                    <div class="column__likes">
+                        <span class="column__likes-counter">1</span>
+                    </div>
+                </li>
             </ul>
+            <button class="column__button">
+                <span class="column__button-image"></span>
+                    Add another card
+            </button>
         </section>
         <section class="column">
+            <div class="column__header-container">
+                <h2 class="column__title">In progress</h2>
+                <span class="column__object"></span>
+            </div>
             <ul class="column__list">
-                <div class="column__header-container">
-                    <h2 class="column__title"></h2>
-                    <span class="column__object"></span>
-                </div>
+                
             </ul>
+            <button class="column__button" type="button">
+                <span class="column__button-image"></span>
+                Add another card
+            </button>
         </section>
         <section class="column">
+            <div class="column__header-container">
+                <h2 class="column__title">Done</h2>
+                <span class="column__object"></span>
+            </div>
             <ul class="column__list">
-                <div class="column__header-container">
-                    <h2 class="column__title"></h2>
-                    <span class="column__object"></span>
-                </div>
+                
             </ul>
+            <button class="column__button">
+                <span class="column__button-image"></span>
+                Add another card
+            </button>
         </section>
     </body>
-
 </html>

@@ -1,0 +1,95 @@
+.column
+    background-color: #C0C0C0
+    min-width: 320px
+    border-radius: 5px 5px
+    margin: 5px
+    padding: 8px 8px
+    box-sizing: border-box
+
+    &__header-container
+        padding: 0px 0px 15px 0px
+
+    &__list
+        list-style-type: none
+        margin: 0
+        padding: 0
+
+    &__title
+        margin: 0
+        font-size: 1.6rem
+        text-transform: uppercase
+
+    &__item
+        position: relative
+
+        background-color: #fff
+
+        margin: 5px 0 5px
+        padding: 5px 0 5px
+
+        border-radius: 5px 5px
+
+    &__item-hover
+        position: absolute
+        right: 5px
+        top: 5px
+        
+        background-image: url("./images/icon-delete.svg")
+        background-repeat: no-repeat
+        background-size: cover
+
+        visibility: hidden
+
+        width: 15px
+        height: 15px
+
+    &__text
+        padding: 0 0 8px 8px
+        margin: 0
+
+        font-size: 1.6rem
+
+    &__button
+        display: flex
+        align-items: center
+
+        font-size: 1.4rem
+
+        border: none
+        background-color: transparent
+
+        padding: 0
+        margin: 20px 0 0
+
+        cursor: pointer
+
+    &__button-image
+        display: block
+
+        background-image: url("./images/icon-plus.png")
+        background-repeat: no-repeat
+        background-size: cover
+        box-sizing: border-box
+
+        width: 20px
+        height: 20px
+
+        margin: 0 10px 0 0
+
+    &__likes
+        background-image: url("./images/icon-like.png")
+        background-repeat: no-repeat
+        background-size: cover
+        box-sizing: border-box
+        
+        width: 20px
+        height: 20px
+
+        margin: 0 0 0 8px
+
+        cursor: pointer
+
+    &__likes-counter
+        padding: 0 0 0 25px
+
+        font-size: 1.6rem
