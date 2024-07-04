@@ -7,7 +7,7 @@ export default class Card {
         columnItemHover.classList.add('column__item-hover');
 
         columnItem.append(columnItemHover);
-        item[0].append(columnItem);
+        item[0].appendChild(columnItem);
     }
 
     removeCard(item) {

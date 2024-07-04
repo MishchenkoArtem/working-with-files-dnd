@@ -3,4 +3,8 @@
   display: flex;
   justify-content: center;
   background-color: #008080;
+}
+.page__dragged {
+  position: absolute;
+  z-index: 10;
 }/*# sourceMappingURL=page.css.map */

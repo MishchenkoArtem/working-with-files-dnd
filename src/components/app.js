@@ -58,4 +58,37 @@ document.addEventListener("DOMContentLoaded", () => {
             card.removeCard(target);
         }
     });
+
+    let draggedEl;
+    let ghostEl;
+    
+    const onMouseOver = (event) => {
+        actualElement.style.top = event.clientY + 'px';
+        actualElement.style.left = event.clientX + 'px';
+    }
+    
+    const onMouseUp = (event) => {
+        const mouseUpItem = event.target;
+
+        columnList[0].insertBefore(actualElement, mouseUpItem);
+        actualElement.classList.remove('page__dragged');
+        actualElement = null;
+        page.removeEventListener('mouseup', onMouseUp);
+        page.removeEventListener('mouseover', onMouseOver);
+    };
+
+    columnList[0].addEventListener('mousedown', (event) => {
+        event.preventDefault();
+
+        if (event.target.className.includes('column__item')) {
+            return;
+        }
+
+        draggedEl = event.target;
+        ghostEl.event.target.cloneNode(true);
+        ghostEl.classList.add('page__dragged');
+        page.appendChild(ghostEl);
+        ghostEl.style.top = `${evt.pageY - ghostEl.offset.Hidth /2}px}`;
+        ghostEl.style.left = `${evt.pageX - ghostEl.offset.Width /2}px}`;
+    });
 });
