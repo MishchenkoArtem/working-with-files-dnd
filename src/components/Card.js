@@ -1,5 +1,5 @@
 export default class Card {
-    addCard(item) {
+    createCard(elem) {
         const columnItem = document.createElement('li');
         const columnItemHover = document.createElement('div');
 
@@ -7,7 +7,11 @@ export default class Card {
         columnItemHover.classList.add('column__item-hover');
 
         columnItem.append(columnItemHover);
-        item[0].appendChild(columnItem);
+        elem.appendChild(columnItem);
+    }
+
+    addCard(item) {
+        this.createCard(item);
     }
 
     removeCard(item) {
