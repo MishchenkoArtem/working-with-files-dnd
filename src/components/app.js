@@ -1,4 +1,4 @@
-import { page, buttonAddCard, columnList, columnItemHover } from './constans';
+import { page, buttonAddCard, columnList, columnItemHover, actualElement } from './constans';
 import Card from './Card';
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -45,7 +45,7 @@ document.addEventListener("DOMContentLoaded", () => {
     buttonAddCard.forEach(button => {
         button.addEventListener('click', () => {
             const card = new Card();
-            
+
             columnList.forEach(elem => {
                 if (button.dataset.button === elem.dataset.column) {
                     card.addCard(elem);
@@ -62,5 +62,18 @@ document.addEventListener("DOMContentLoaded", () => {
             const card = new Card();
             card.removeCard(target);
         }
+    });
+
+    columnList.forEach(elem => {
+        elem.addEventListener('mousedown', (event) => {
+            event.preventDefault();
+
+            actualElement = event.target.closest('li');
+            actualElement.classList.add('page__dragged');
+        });
+    });
+
+    page.addEventListener('mousemove', (event) => {
+        console.log(event);
     });
 });

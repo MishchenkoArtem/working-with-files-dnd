@@ -35,10 +35,10 @@ html {
   text-transform: uppercase;
 }
 .column__item {
-  position: relative;
   background-color: #fff;
   margin: 5px 0 5px;
   padding: 5px 0 5px;
+  min-width: 300px;
   border-radius: 5px 5px;
 }
 .column__item-hover {
