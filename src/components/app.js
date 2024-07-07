@@ -1,4 +1,4 @@
-import { page, buttonAddCard, columnList, columnItemHover, actualElement } from './constans';
+import { page, buttonAddCard, columnList, columnItemHover } from './constans';
 import Card from './Card';
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -64,16 +64,33 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     });
 
+    let actualElement;
+
     columnList.forEach(elem => {
         elem.addEventListener('mousedown', (event) => {
             event.preventDefault();
 
             actualElement = event.target.closest('li');
             actualElement.classList.add('page__dragged');
+            actualElement.style.cursor = 'grab';
+
+            page.addEventListener('mousemove', moveElement);
+            page.addEventListener('mouseup', mouseupElement);
         });
     });
 
-    page.addEventListener('mousemove', (event) => {
-        console.log(event);
-    });
+    const moveElement = (event) => {
+        actualElement.style.top = `${event.clientY}px`;
+        actualElement.style.left = `${event.clientX}px`;
+    }
+
+    const mouseupElement = () => {
+        const parentElement = actualElement.parentNode;
+        parentElement.prepend(actualElement);
+
+        actualElement.classList.remove('page__dragged');
+        actualElement.style.cursor = 'auto';
+        actualElement = undefined;
+        page.removeEventListener('mousemove', moveElement);
+    }
 });
