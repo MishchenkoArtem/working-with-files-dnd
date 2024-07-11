@@ -1,12 +1,20 @@
 export default class Card {
     createCard(elem) {
         const columnItem = document.createElement('li');
+        const columnWrapper = document.createElement('div');
         const columnItemHover = document.createElement('div');
+        const columnInput = document.createElement('input');
 
         columnItem.classList.add('column__item');
+        columnWrapper.classList.add('column__wrapper');
         columnItemHover.classList.add('column__item-hover');
+        columnInput.classList.add('column__item-input');
 
-        columnItem.append(columnItemHover);
+        columnInput.placeholder = 'Enter a title for this card';
+
+        columnItem.prepend(columnWrapper);
+        columnItem.prepend(columnInput);
+        columnWrapper.append(columnItemHover);
         elem.appendChild(columnItem);
     }
 

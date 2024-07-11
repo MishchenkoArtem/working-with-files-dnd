@@ -20,11 +20,15 @@
         font-size: 1.6rem
         text-transform: uppercase
 
+    &__wrapper
+        display: flex
+        justify-content: space-between
+
     &__item
         background-color: #fff
 
         margin: 5px 0 5px
-        padding: 5px 0 5px
+        padding: 5px 5px
         min-width: 300px
         border-radius: 5px 5px
 
@@ -32,7 +36,6 @@
             cursor: grab
 
     &__item-hover
-        position: absolute
         right: 5px
         top: 5px
         
@@ -44,9 +47,17 @@
 
         width: 15px
         height: 15px
+        cursor: pointer
+
+    &__item-input
+        border: none
+        padding: 5px 10px 5px 10px
+        font-size: 1.4rem
+        min-width: 290px
+        box-sizing: border-box
 
     &__text
-        padding: 0 0 8px 8px
+        padding: 0 0 8px 0px
         margin: 0
 
         font-size: 1.6rem
@@ -64,6 +75,22 @@
         margin: 20px 0 0
 
         cursor: pointer
+        
+        &_active
+            display: flex
+            align-items: center
+
+            font-size: 1.4rem
+            text-transform: uppercase
+            color: #fff
+
+            border: solid #3CB371 1px
+            background-color: #2E8B57
+
+            padding: 3px
+            margin: 20px 0 0
+
+            cursor: pointer
 
     &__button-image
         display: block

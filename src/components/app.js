@@ -1,5 +1,8 @@
-import { page, buttonAddCard, columnList, columnItemHover } from './constans';
+import { page, buttonAddCard, columnList } from './constans';
 import Card from './Card';
+
+const card = new Card();
+let columnItemHover;
 
 document.addEventListener("DOMContentLoaded", () => {
     
@@ -8,12 +11,15 @@ document.addEventListener("DOMContentLoaded", () => {
         const target = event.target;
     
         if (target.className === 'column__item') {
-            const columnItemHover = target.children[0];
+            columnItemHover = target.querySelector('.column__item-hover');
             columnItemHover.style.visibility = 'visible';
         }
     
         if (target.className === 'column__text') {
-            const columnItemHover = target.previousElementSibling;
+            columnItemHover.style.visibility = 'visible';
+        }
+
+        if (target.className === 'column__wrapper') {
             columnItemHover.style.visibility = 'visible';
         }
     
@@ -23,7 +29,6 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     });
     
-    
     // --- Слушатель скрытие корзины на карточке
     page.addEventListener('mouseout', (event) => {
         const target = event.target;
@@ -31,24 +36,52 @@ document.addEventListener("DOMContentLoaded", () => {
         if (target.className === 'column__item-hover') return;
     
         if (target.className === 'column__item') {
-            const columnItemHover = target.children[0];
+            const columnItemHover = target.querySelector('.column__item-hover');
             columnItemHover.style.visibility = 'hidden';
+        }
+
+        if (target.className === 'column__wrapper') {
+            columnItemHover.style.visibility = 'visible';
         }
     
         if (target.className === 'column__text') {
-            const columnItemHover = target.previousElementSibling;
             columnItemHover.style.visibility = 'hidden';
         }
     });
     
+    const changeButtonDefault = (button) => {
+        button.classList.remove('column__button_active');
+        button.textContent = 'Add another card';
+        const columnButtonImage = document.createElement('span');
+        columnButtonImage.classList.add('column__button-image');
+        button.prepend(columnButtonImage);
+    }
+
+    const changeButtonActive = (button) => {
+        button.classList.add('column__button_active');
+        button.querySelector('.column__button-image').remove();
+        button.textContent = 'Add card';
+    }
+
+    const findElement = (elem) => {
+        Array(elem).forEach(element => console.log(element));
+    }
+
     // --- Слушатель добавления новой карточки
     buttonAddCard.forEach(button => {
         button.addEventListener('click', () => {
-            const card = new Card();
-
             columnList.forEach(elem => {
                 if (button.dataset.button === elem.dataset.column) {
-                    card.addCard(elem);
+                    if (button.className === 'column__button') 
+                        {
+                            card.addCard(elem);
+                            changeButtonActive(button);
+                        } 
+                    else if (button.classList.contains('column__button_active')) 
+                        {
+                            changeButtonDefault(button);
+                            findElement(elem);
+                        } 
                 }
             });
         });
@@ -64,33 +97,34 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     });
 
-    let actualElement;
+    // let actualElement;
 
-    columnList.forEach(elem => {
-        elem.addEventListener('mousedown', (event) => {
-            event.preventDefault();
+    // columnList.forEach(elem => {
+    //     elem.addEventListener('mousedown', (event) => {
+    //         event.preventDefault();
 
-            actualElement = event.target.closest('li');
-            actualElement.classList.add('page__dragged');
-            actualElement.style.cursor = 'grab';
+    //         actualElement = event.target.closest('li');
+    //         actualElement.classList.add('page__dragged');
+    //         actualElement.style.cursor = 'grab';
 
-            page.addEventListener('mousemove', moveElement);
-            page.addEventListener('mouseup', mouseupElement);
-        });
-    });
+    //         page.addEventListener('mousemove', moveElement);
+    //         page.addEventListener('mouseup', mouseUpElement);
+    //     });
+    // });
 
-    const moveElement = (event) => {
-        actualElement.style.top = `${event.clientY}px`;
-        actualElement.style.left = `${event.clientX}px`;
-    }
+    // const moveElement = (event) => {
+    //     actualElement.style.top = `${event.clientY}px`;
+    //     actualElement.style.left = `${event.clientX}px`;
+    // }
 
-    const mouseupElement = () => {
-        const parentElement = actualElement.parentNode;
-        parentElement.prepend(actualElement);
+    // const mouseUpElement = (event) => {
+    //     const parentElement = actualElement.parentNode;
 
-        actualElement.classList.remove('page__dragged');
-        actualElement.style.cursor = 'auto';
-        actualElement = undefined;
-        page.removeEventListener('mousemove', moveElement);
-    }
+    //     parentElement.prepend(actualElement);
+
+    //     actualElement.classList.remove('page__dragged');
+    //     actualElement = undefined;
+    //     page.removeEventListener('mousemove', moveElement);
+    //     page.removeEventListener('mouseup', mouseUpElement);
+    // }
 });
