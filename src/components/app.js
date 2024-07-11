@@ -1,4 +1,4 @@
-import { page, buttonAddCard, columnList } from './constans';
+import { page, buttonAddCard, columnList, popup } from './constans';
 import Card from './Card';
 
 const card = new Card();
@@ -10,20 +10,29 @@ document.addEventListener("DOMContentLoaded", () => {
     page.addEventListener('mouseover', (event) => {
         const target = event.target;
     
-        if (target.className === 'column__item') {
+        if (target.className === 'column__item') 
+        {
             columnItemHover = target.querySelector('.column__item-hover');
             columnItemHover.style.visibility = 'visible';
         }
     
-        if (target.className === 'column__text') {
+        if (target.className === 'column__text') 
+        {
             columnItemHover.style.visibility = 'visible';
         }
 
-        if (target.className === 'column__wrapper') {
+        if (target.className === 'column__wrapper') 
+        {
+            columnItemHover.style.visibility = 'visible';
+        }
+
+        if (target.className === 'column__item-input') 
+        {
             columnItemHover.style.visibility = 'visible';
         }
     
-        if (target.className === 'column__item-hover') {
+        if (target.className === 'column__item-hover') 
+        {
             const columnItemHover = target;
             columnItemHover.style.visibility = 'visible';
         }
@@ -35,16 +44,19 @@ document.addEventListener("DOMContentLoaded", () => {
     
         if (target.className === 'column__item-hover') return;
     
-        if (target.className === 'column__item') {
+        if (target.className === 'column__item') 
+        {
             const columnItemHover = target.querySelector('.column__item-hover');
             columnItemHover.style.visibility = 'hidden';
         }
 
-        if (target.className === 'column__wrapper') {
+        if (target.className === 'column__wrapper') 
+        {
             columnItemHover.style.visibility = 'visible';
         }
     
-        if (target.className === 'column__text') {
+        if (target.className === 'column__text') 
+        {
             columnItemHover.style.visibility = 'hidden';
         }
     });
@@ -52,6 +64,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const changeButtonDefault = (button) => {
         button.classList.remove('column__button_active');
         button.textContent = 'Add another card';
+
         const columnButtonImage = document.createElement('span');
         columnButtonImage.classList.add('column__button-image');
         button.prepend(columnButtonImage);
@@ -63,10 +76,6 @@ document.addEventListener("DOMContentLoaded", () => {
         button.textContent = 'Add card';
     }
 
-    const findElement = (elem) => {
-        Array(elem).forEach(element => console.log(element));
-    }
-
     // --- Слушатель добавления новой карточки
     buttonAddCard.forEach(button => {
         button.addEventListener('click', () => {
@@ -74,14 +83,15 @@ document.addEventListener("DOMContentLoaded", () => {
                 if (button.dataset.button === elem.dataset.column) {
                     if (button.className === 'column__button') 
                         {
-                            card.addCard(elem);
+                            elem.append(popup);
+                            popup.classList.add('popup_opened');
                             changeButtonActive(button);
-                        } 
+                        }
                     else if (button.classList.contains('column__button_active')) 
                         {
                             changeButtonDefault(button);
-                            findElement(elem);
-                        } 
+                            popup.classList.remove('popup_opened');
+                        }
                 }
             });
         });
