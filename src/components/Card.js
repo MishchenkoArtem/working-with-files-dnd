@@ -1,23 +1,20 @@
+import { template, popup } from './constans.js';
+
 export default class Card {
-    createCard(elem) {
-        const columnItem = document.createElement('li');
-        const columnWrapper = document.createElement('div');
-        const columnText = document.createElement('p');
-        const columnItemHover = document.createElement('div');
-
-        columnItem.classList.add('column__item');
-        columnWrapper.classList.add('column__wrapper');
-        columnItemHover.classList.add('column__item-hover');
-        columnText.classList.add('column__text');
-
-        columnItem.prepend(columnWrapper);
-        columnWrapper.prepend(columnText);
-        columnWrapper.append(columnItemHover);
-        elem.appendChild(columnItem);
+    createCard(elem, value) {
+        const item = template.content.cloneNode(true);
+        const itemText = item.querySelector('.column__text');
+        
+        itemText.textContent = value;
+        
+        elem.appendChild(item);
     }
 
-    renderCard(item) {
-        this.createCard(item);
+    renderCard(item, value) {
+        this.createCard(item, value);
+
+        const popupInput = popup.querySelector('.popup__input');
+        popupInput.value = '';
     }
 
     removeCard(item) {

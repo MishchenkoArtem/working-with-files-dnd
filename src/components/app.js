@@ -9,24 +9,21 @@ document.addEventListener("DOMContentLoaded", () => {
     // --- Слушатель отображения корзины на карточке
     page.addEventListener('mouseover', (event) => {
         const target = event.target;
+        columnItemHover = target.querySelector('.column__item-hover');
     
         if (target.className === 'column__item') 
         {
-            columnItemHover = target.querySelector('.column__item-hover');
             columnItemHover.style.visibility = 'visible';
         }
     
-        if (target.className === 'column__text') 
+        if (target.className === 'column__text')
         {
+            const parentItem = event.target.parentElement;
+            columnItemHover = parentItem.querySelector('.column__item-hover');
             columnItemHover.style.visibility = 'visible';
         }
 
         if (target.className === 'column__wrapper') 
-        {
-            columnItemHover.style.visibility = 'visible';
-        }
-
-        if (target.className === 'column__item-input') 
         {
             columnItemHover.style.visibility = 'visible';
         }
@@ -80,7 +77,8 @@ document.addEventListener("DOMContentLoaded", () => {
     buttonAddCard.forEach(button => {
         button.addEventListener('click', () => {
             columnList.forEach(elem => {
-                if (button.dataset.button === elem.dataset.column) {
+                if (button.dataset.button === elem.dataset.column)
+                {
                     if (button.className === 'column__button') 
                         {
                             elem.append(popup);
@@ -89,8 +87,13 @@ document.addEventListener("DOMContentLoaded", () => {
                         }
                     else if (button.classList.contains('column__button_active')) 
                         {
-                            changeButtonDefault(button);
                             popup.classList.remove('popup_opened');
+                            const popupInput = popup.querySelector('.popup__input').value;
+                            
+                            changeButtonDefault(button);
+
+                            if (popupInput === '') return;
+                            card.renderCard(elem, popupInput);
                         }
                 }
             });
@@ -107,34 +110,35 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     });
 
-    // let actualElement;
+    let actualElement;
 
-    // columnList.forEach(elem => {
-    //     elem.addEventListener('mousedown', (event) => {
-    //         event.preventDefault();
+    columnList.forEach(elem => {
+        elem.addEventListener('mousedown', (event) => {
+            if (event.target.className === 'popup' || event.target.className === 'popup__input') return;
+            event.preventDefault();
 
-    //         actualElement = event.target.closest('li');
-    //         actualElement.classList.add('page__dragged');
-    //         actualElement.style.cursor = 'grab';
+            actualElement = event.target.closest('li');
+            actualElement.classList.add('page__dragged');
+            actualElement.style.cursor = 'grab';
+            
+            page.addEventListener('mousemove', moveElement);
+            page.addEventListener('mouseup', mouseUpElement);
+        });
+    });
 
-    //         page.addEventListener('mousemove', moveElement);
-    //         page.addEventListener('mouseup', mouseUpElement);
-    //     });
-    // });
+    const moveElement = (event) => {
+        actualElement.style.top = `${event.clientY}px`;
+        actualElement.style.left = `${event.clientX}px`;
+    }
 
-    // const moveElement = (event) => {
-    //     actualElement.style.top = `${event.clientY}px`;
-    //     actualElement.style.left = `${event.clientX}px`;
-    // }
+    const mouseUpElement = (event) => {
+        const parentElement = event.target;
 
-    // const mouseUpElement = (event) => {
-    //     const parentElement = actualElement.parentNode;
+        parentElement.prepend(actualElement);
 
-    //     parentElement.prepend(actualElement);
-
-    //     actualElement.classList.remove('page__dragged');
-    //     actualElement = undefined;
-    //     page.removeEventListener('mousemove', moveElement);
-    //     page.removeEventListener('mouseup', mouseUpElement);
-    // }
+        actualElement.classList.remove('page__dragged');
+        actualElement = undefined;
+        page.removeEventListener('mousemove', moveElement);
+        page.removeEventListener('mouseup', mouseUpElement);
+    }
 });
