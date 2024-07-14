@@ -134,7 +134,10 @@ document.addEventListener("DOMContentLoaded", () => {
     const mouseUpElement = (event) => {
         const parentElement = event.target;
 
-        parentElement.prepend(actualElement);
+        if (parentElement.className === 'column__list')
+        {
+            parentElement.prepend(actualElement);
+        }
 
         actualElement.classList.remove('page__dragged');
         actualElement = undefined;
